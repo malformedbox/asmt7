@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.meritamerica.assignment7.model.User;
+
 import com.meritamerica.assignment7.model.services.AuthService;
 
 import DTO.SignupRequest;

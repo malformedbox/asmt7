@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.meritamerica.assignment7.model.User;
+import com.meritamerica.assignment7.model.MyUser;
 import com.meritamerica.assignment7.model.services.UserServices;
 
 import DTO.SignupRequest;
@@ -21,17 +21,17 @@ public class UserController {
 	UserServices ahDetailService;
 	
 	@GetMapping("/ahdetails")
-	public List<User> getAllDetails(){
+	public List<MyUser> getAllDetails(){
 		return ahDetailService.getAllDetails();
 	}
 	
 	@GetMapping("/ahdetails/{id}")
-	public User getAccountHoldersContactDetails(@PathVariable Long id) {
+	public MyUser getAccountHoldersContactDetails(@PathVariable Long id) {
 		return ahDetailService.getAccountHoldersContactDetailsById(id);
 	}
 	
 	@PostMapping("/ahdetails")
-	public User addAccountHoldersContactDetails(@RequestBody SignupRequest ahDetailDTO) {
+	public MyUser addAccountHoldersContactDetails(@RequestBody SignupRequest ahDetailDTO) {
 		return ahDetailService.addAccountHoldersContactDetails(ahDetailDTO);
 	}
 }

@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.meritamerica.assignment7.model.AccountHolder;
-import com.meritamerica.assignment7.model.User;
+import com.meritamerica.assignment7.model.MyUser;
+
 import com.meritamerica.assignment7.model.repository.AccountHolderRepository;
 import com.meritamerica.assignment7.model.repository.UserRepository;
 
@@ -21,7 +22,7 @@ public class UserServices {
 	
 	public UserServices() {}
 	
-	public List<User> getAllDetails(){
+	public List<MyUser> getAllDetails(){
 		return ahDetailsRepo.findAll();
 	}
 	
@@ -29,11 +30,11 @@ public class UserServices {
 		AccountHolder ah = ahRepo.findById(accid).orElse(null);
 		return ah;
 	}
-	public User getAccountHoldersContactDetailsById(Long id) {
+	public MyUser getAccountHoldersContactDetailsById(Long id) {
 		return ahDetailsRepo.findById(id).orElse(null);
 	}
-	public User addAccountHoldersContactDetails(SignupRequest ahDetailDTO) {
-		User newDetail = new User(ahDetailDTO.getUsername(), ahDetailDTO.getPassword());
+	public MyUser addAccountHoldersContactDetails(SignupRequest ahDetailDTO) {
+		MyUser newDetail = new MyUser(ahDetailDTO.getUsername(), ahDetailDTO.getPassword());
 		return ahDetailsRepo.save(newDetail);
 	}
 }

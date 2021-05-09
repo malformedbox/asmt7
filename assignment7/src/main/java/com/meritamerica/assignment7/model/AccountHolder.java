@@ -31,7 +31,7 @@ public class AccountHolder implements Comparable<AccountHolder>{
 	private String ssn;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	private User user;
+	private MyUser user;
 	
 	private static final double BALANCE_LIMIT = 250000;
 	
@@ -81,10 +81,10 @@ public class AccountHolder implements Comparable<AccountHolder>{
 		this.ssn = ssn;
 	}
 	
-	public User getAccountHoldersContactDetails() {
+	public MyUser getAccountHoldersContactDetails() {
 		return user;
 	}
-	public void setAccountHoldersContactDetails (User ahDetails) {
+	public void setAccountHoldersContactDetails (MyUser ahDetails) {
 		this.user = ahDetails;
 	}
 

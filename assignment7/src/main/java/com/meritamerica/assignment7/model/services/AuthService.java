@@ -11,8 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.meritamerica.assignment7.model.MyUser;
 import com.meritamerica.assignment7.model.Role;
-import com.meritamerica.assignment7.model.User;
+
 import com.meritamerica.assignment7.model.enums.RoleEnum;
 import com.meritamerica.assignment7.model.exceptions.ApiNotFoundException;
 import com.meritamerica.assignment7.model.repository.RoleRepository;
@@ -38,7 +39,7 @@ public class AuthService {
 					.body(String.format("Username %s already exists", signupRequest.getUsername()));
 		}
 		
-		User user = new User(signupRequest.getUsername(), passwordEncoder.encode(signupRequest.getPassword()));
+		MyUser user = new MyUser(signupRequest.getUsername(), passwordEncoder.encode(signupRequest.getPassword()));
 		Set<String> strRoles = signupRequest.getRoles();
 		Set<Role> roles = new HashSet<>();
 		
@@ -56,7 +57,7 @@ public class AuthService {
 				}
 			});
 		}
-		user.setRoles(roles);
+		//user.setRoles(roles);
 		userRepository.save(user);
 		return new ResponseEntity<>("User created", HttpStatus.CREATED);
 	}

@@ -23,36 +23,34 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 //@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
-public class User {
+public class MyUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@NotBlank
-	@Size(max = 50)
-	@Email
+	
+	
 	private String username;
 	
-	@JsonIgnore
-	@NotBlank
-	@Size(max = 120)
+
 	private String password;
 	
 	private boolean active;
 	private String role;
+
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "accHolder_id")
-	private AccountHolder accHolder;
+	//@OneToOne(cascade = CascadeType.ALL)
+	//@JoinColumn(name = "accHolder_id")
+	//private AccountHolder accHolder;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user_roles",
-			joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles = new HashSet<>();
+	//@ManyToMany(fetch = FetchType.LAZY)
+	//@JoinTable(name = "user_roles",
+			//joinColumns = @JoinColumn(name = "user_id"),
+			//inverseJoinColumns = @JoinColumn(name = "role_id"))
+	//private Set<Role> roles = new HashSet<>();
 	
-	public User() {}
-	public User(String username, String password) {
+	public MyUser() {}
+	public MyUser(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}
@@ -74,18 +72,22 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	/**
 	public AccountHolder getAccHolder() {
 		return accHolder;
 	}
 	public void setAccHolder(AccountHolder accHolder) {
 		this.accHolder = accHolder;
 	}
+	*/
+	/*
 	public Set<Role> getRoles() {
 		return roles;
 	}
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+	*/
 	public boolean isActive() {
 		return active;
 	}
