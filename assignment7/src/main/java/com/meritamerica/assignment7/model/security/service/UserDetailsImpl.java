@@ -1,5 +1,6 @@
 package com.meritamerica.assignment7.model.security.service;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -21,32 +22,32 @@ public class UserDetailsImpl implements UserDetails {
 	@JsonIgnore
 	private String password;
 	
-	private Collection<? extends GrantedAuthority> authorities;
+	private boolean active;
+	private List<GrantedAuthority> authorities;
 	
 	public UserDetailsImpl() {}
 	public UserDetailsImpl(Long id, String username, String password,
-							Collection<? extends GrantedAuthority> authorities) {
+							String role) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.authorities = authorities;
 	}
+    public UserDetailsImpl(User user) {
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.active = user.isActive();
+  
+    }
 	
 	public static UserDetailsImpl build(User user) {
-		List<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
-                .collect(Collectors.toList());	
 		
 		return new UserDetailsImpl(
 				user.getId(),
 				user.getUsername(),
 				user.getPassword(),
-				authorities
+				user.getRole()
 				);
 	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() { return authorities; }
 
 	public Long getId() { return id; }
 	
@@ -76,5 +77,9 @@ public class UserDetailsImpl implements UserDetails {
 			return false;
 		UserDetailsImpl user = (UserDetailsImpl) o;
 		return Objects.equals(id, user.id);
+	}
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
 	}
 }
